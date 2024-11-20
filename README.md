@@ -1,22 +1,14 @@
-# Embedded Systems Lab 7: CMSIS-DSP Programming
+# Embedded Systems Lab 6: Data Acquisition, DMA, and Interrupt
 
-This repository contains the solution to **Lab 7: CMSIS-DSP Programming**. The project demonstrates the implementation of **DSP algorithms** on an **STM32 microcontroller**, processing sensor data and validating results using known test signals and real-world data.
+This repository contains the solution to **Lab 6: Data Acquisition, DMA, and Interrupt**. The project demonstrates the configuration of **ADC (Analog-to-Digital Converter) with DMA (Direct Memory Access)** on an **STM32 microcontroller**, acquiring temperature sensor data and handling it using interrupts for efficient data processing.
 
 ---
 
 ## Problem Statement
 
-The objective of this lab is to design a DSP program using **STM32CubeIDE** to process sensor data from the **STM32 IoT Node development board**. The lab requires the implementation of DSP algorithms, such as a **low-pass filter (FIR)** or **FFT**, and validation of the program with both test signals and actual sensor data. Additionally, there is an optional challenge to extend functionality using **CMSIS-RTOS2**.
+The objective of this lab is to set up an **ADC** to sample data from the **STM32 internal temperature sensor** at a fixed frequency, using **DMA** and **interrupts** to manage data transfer and print sensor values via UART. This lab requires:
 
-### Requirements
-
-1. **DSP Algorithm Implementation (DONE)**:
-   - Process sensor data (e.g., from 3D accelerometers or gyroscopes).
-   - Implement a DSP algorithm such as a **low-pass filter** (e.g., FIR) or **FFT**.
-   - Test the program with a known signal to validate correctness before testing real data.
-
-2. **Optional Challenge: Multi-Tasking with CMSIS-RTOS2** (*+10 points*) (DONE):
-   - Design three tasks scheduled by **CMSIS-RTOS2**:
-     1. **Sensor Data Acquisition**: The highest-priority task, triggered by a timer, periodically reads sensor data.
-     2. **Data Processing**: Processes the acquired data using a digital filter (e.g., low-pass filter).
-     3. **Data Transmission**: Sends both raw and processed data via **Wi-Fi** or **BLE** to a PC or Raspberry Pi for visualization and validation.
+1. **ADC and Timer Configuration**: Setting up **ADC1** to sample data at a fixed frequency, using **TIM1** as the trigger. The parameters for sampling frequency must be set and explained.
+2. **RTOS Task Notification**: Using an interrupt to notify an RTOS task to output temperature values through **UART** after each ADC conversion.
+3. **DMA Implementation**: Configuring **DMA** to transfer data from the ADC data register to a specific buffer. 
+4. **Buffer and Interrupt Handling**: Generating interrupts when each half of the buffer is filled, allowing for efficient data transfer and printing of sensor values.
